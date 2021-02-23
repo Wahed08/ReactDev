@@ -3,6 +3,8 @@ import Signup from "./components/SignUp";
 import Login from "./components/LogIn";
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 import Navbar from "./components/Navbar";
+import Footer from './components/Footer'
+//import Test from './components/Test';
 
 
 function App() {
@@ -21,13 +23,15 @@ function App() {
                 <Login/>
               </Route>
               
-              <Route path="/">
+              <Route exact path="/">
                 <Home/>
               </Route>
 
             </Switch>
         
       </div>
+      <Footer/>
+      {/* <Test/> */}
     </div>
     </Router>
   );

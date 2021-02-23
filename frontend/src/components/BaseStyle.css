@@ -5,3 +5,11 @@
     font-family: "Quicksand";
     color: #333;
   }
+
+footer{
+    color: #777;
+    font-size: large;
+    font-weight: 800;
+    text-align: center;
+    margin: 130px 100px;
+}
