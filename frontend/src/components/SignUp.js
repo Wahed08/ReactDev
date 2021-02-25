@@ -55,16 +55,25 @@ class SignUp extends Component {
     }
      
 
-     handeleSubmit = (event) => {
+     handeleSubmit(){
         //event.preventDefault();
-         const {name, username, department, email, password, confirm_password} = this.state;
+         ///const {name, username, department, email, password, confirm_password} = this.state;
         
-         axios.post('http://localhost:5000/signup',{name,username,department,email,password,confirm_password})
+         axios.post('http://localhost:4000/add',this.state)
         .then(res=>
           console.log(res))
         .catch(err=>
-          console.log(err));
-     };
+          console.log(err))
+        // fetch('http://localhost:5000/post/add',{
+        //     method: "POST",
+        //     headers: {"Content-Type": "application/json" },
+        //     body: JSON.stringify(this.state)
+        // }).then((res)=>{
+        //     console.log(res)
+        // }).catch(err=>{
+        //     console.log(err)
+        // })
+        }
     
        
         render(){
