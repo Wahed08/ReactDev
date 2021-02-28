@@ -1,0 +1,11 @@
+POST http://localhost:5000/post/signup
+Content-Type: application/json
+
+{
+    "name": "baal",
+    "username": "caal",
+    "department":"no",
+    "email":"baal123@yahoo.com",
+    "password": "123",
+    "confirm_password": "123"
+}

@@ -25,3 +25,7 @@
     box-sizing: border-box;
     display: block;
   }
+  .input{
+    color: white  ;
+    background-color: green;
+  }

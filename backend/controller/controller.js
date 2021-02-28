@@ -1,27 +1,28 @@
 const model = require('../model/model');
+const bcrypt = require('bcryptjs');
 
-const create_register = (req,res) => {
+const create_register = async (req,res) => {
 
-    const Model = new model(req.body);
+     const saltPassword = await bcrypt.genSalt(10);
+     const securePassword = await bcrypt.hash(req.body.password, saltPassword);
 
-    // Model.save().then((result)=>{
-    //     console.log('submitted');
-    //     res.redirect('http://localhost:3000');
-    // }).catch(err=>{
-    //     console.log(err);
-    // });
-    Model.save((err) =>{
-        if(err) return res.status(400).json({success: false,err});
-        return res.status(200).json({success: true});
+    const Model = new model({
+        name : req.body.name,
+        username: req.body.username,
+        department: req.body.department,
+        email: req.body.email,
+        password: securePassword,
+        confirm_password: securePassword
     });
+
+    Model.save()
+    .then(data=>{
+        res.json(data);
+    }).catch(err=>{
+        res.json(err);
+    })
+    
 };
 
-const get_register = (req,res) =>{
-    model.find().exec((err,posts)=>{
 
-        if(err) return res.status(400).json({success: false,err});
-        return res.status(200).json({success: true,posts});
-    })
-}
-
-module.exports = {create_register,get_register};
+module.exports = {create_register};

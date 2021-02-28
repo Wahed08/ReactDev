@@ -1,11 +1,11 @@
 import React, { Component } from 'react'
 import '../components/Signup.css';
-import axios from 'axios';
+//import axios from 'axios';
 
 class SignUp extends Component {
 
-    constructor(props){
-        super(props);
+    constructor(){
+        super();
         this.state={
             name: '',
             username: '',
@@ -14,99 +14,106 @@ class SignUp extends Component {
             password: '',
             confirm_password: ''
         };
-        //this.handleSubmit = this.handleSubmit.bind(this);
+        this.handleNameChange = this.handleNameChange.bind(this);
+        this.handleUsernameChange = this.handleUsernameChange.bind(this);
+        this.handleDepartmentChange = this.handleDepartmentChange.bind(this);
+        this.handleEmailChange = this.handleEmailChange.bind(this);
+        this.handlePassChange = this.handlePassChange.bind(this);
+        this.handlePass2Change = this.handlePass2Change.bind(this);
     }
 
-      handleNameChange = (event) => {
+      handleNameChange(event){
 
         this.setState({
             name : event.target.value
         })
       }
-      handleUsernameChange = (event) => {
+      handleUsernameChange(event){
 
         this.setState({
             username : event.target.value
         })
       }
-      handleDepartmentChange = (event) => {
+      handleDepartmentChange(event){
 
         this.setState({
             department : event.target.value
         })
       }
-      handleEmailChange = (event) => {
+      handleEmailChange(event){
 
         this.setState({
             email : event.target.value
         })
       }
-      handlePassChange = (event) => {
+      handlePassChange(event){
 
         this.setState({
             password : event.target.value
         })
       }
-      handlePass2Change = (event) =>{
+      handlePass2Change(event){
 
         this.setState({
             confirm_password : event.target.value
         })
     }
-     
 
-     handeleSubmit(){
-        //event.preventDefault();
-         ///const {name, username, department, email, password, confirm_password} = this.state;
-        
-         axios.post('http://localhost:4000/add',this.state)
-        .then(res=>
-          console.log(res))
-        .catch(err=>
-          console.log(err))
-        // fetch('http://localhost:5000/post/add',{
-        //     method: "POST",
-        //     headers: {"Content-Type": "application/json" },
-        //     body: JSON.stringify(this.state)
-        // }).then((res)=>{
-        //     console.log(res)
-        // }).catch(err=>{
-        //     console.log(err)
-        // })
-        }
-    
+        handleSubmit = (e) =>{
+        e.preventDefault();
+        const post = {
+                name : this.state.name,
+                username: this.state.username,
+                department: this.state.department,
+                email: this.state.email,
+                password: this.state.password,
+                confirm_password: this.state.confirm_password
+          }
+
+            fetch('http://localhost:5000/post/signup',{
+                method: "POST",
+                headers: {"Content-Type": "application/json" },
+                body: JSON.stringify(post)
+            }).then((res)=>{
+               console.log(res)
+            }).catch(err=>{
+              console.log(err);
+            })
+
+            window.location = 'http://localhost:3000/login';
+ }
+              
        
         render(){
         return (
-            // <div className="container">
+             <div className="container">
                 <div className="create">
                 <form onSubmit={this.handleSubmit}>
                 <h1>Sign Up</h1>
                 <p>Please fill in this form to create an account.</p>
 
                 <label for="name"><b>Name</b></label>
-                <input type="text" placeholder="Enter Name" name="name" value={this.state.name} required onChange={this.handleNameChange}></input>
+                <input type="text" placeholder="Enter Name" value={this.state.name} onChange={this.handleNameChange} required></input>
 
                 <label for="username"><b>Username</b></label>
-                <input type="text" placeholder="Enter Username" name="username" value={this.state.username} required onChange={this.handleUsernameChange}></input>
+                <input type="text" placeholder="Enter Username" value={this.state.username} onChange={this.handleUsernameChange} required ></input>
 
                 <label for="department"><b>Department</b></label>
-                <input type="text" placeholder="Enter Department" name="department" value={this.state.department} required onChange={this.handleDepartmentChange}></input>
+                <input type="text" placeholder="Enter Department" value={this.state.department} onChange={this.handleDepartmentChange} required ></input>
 
                 <label for="email"><b>Email</b></label>
-                <input type="text" placeholder="Enter Email" name="email" value={this.state.email} required onChange={this.handleEmailChange}></input>
+                <input type="text" placeholder="Enter Email" value={this.state.email} onChange={this.handleEmailChange} required ></input>
 
                 <label for="password"><b>Password</b></label>
-                <input type="password" placeholder="Enter Password" name="password" value={this.state.password} required onChange={this.handlePassChange}></input>
+                <input type="password" placeholder="Enter Password" value={this.state.password} onChange={this.handlePassChange} required ></input>
 
                 <label for="condirm-password"><b>Confirm Pasword</b></label>
-                <input type="password" placeholder="Enter Confirm Password" name="confirm_password" value={this.state.confirm_password} required onChange={this.handlePass2Change}></input>
+                <input type="password" placeholder="Enter Confirm Password" value={this.state.confirm_password} onChange={this.handlePass2Change} required ></input>
 
-                {/* <button type="button" className="btn btn-success btn-lg btn-block" value="submit">Submit</button> */}
-                <input type="submit" value="Submit" />
+                <input type="submit" class="input" value="Submit" />
                 </form>
                 </div>
-            //</div>
+            </div>
 
     )
 
