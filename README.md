@@ -1,2 +1,2 @@
 # ReactDev
-MERN....Trying to learn
+About React Hooks- useState, useParams, useHistory, useEffect
